@@ -1,19 +1,21 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-export default function App() {
+import HomeStack from "./Components/HomeStack";
+import NewDeck from "./Components/NewDeck";
+
+const Tab = createBottomTabNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator initialRouteName="Home">
+        <Tab.Screen name="Home" component={HomeStack} />
+        <Tab.Screen name="Add Deck" component={NewDeck} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
