@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, Modal } from "react-native";
+import { View, Text, TouchableOpacity, Modal, Button } from "react-native";
 
 import AddCard from "./AddCard";
 
@@ -23,9 +23,10 @@ class Deck extends Component {
           animationType="slide"
           transparent={false}
           visible={modalVisible}
-          presentationStyle="formSheet"
+          presentationStyle="fullScreen"
         >
           <AddCard />
+          <Button title="close" onPress={() => this.modalHandler()} />
         </Modal>
         <Text>My Deck will be here </Text>
         <TouchableOpacity onPress={() => this.modalHandler()}>
@@ -40,3 +41,6 @@ class Deck extends Component {
 }
 
 export default Deck;
+
+//Notes:
+// onDismiss for the model doesn't wo
