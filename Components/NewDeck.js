@@ -49,7 +49,7 @@ class NewDeck extends Component {
     const { title , errorMessage } = this.state;
     let errorAlert = null
     if (errorMessage === true) { 
-      errorAlert= <Text style={{color: 'red' }}> 🛑 no title provided</Text>
+      errorAlert=  "🛑 no title provided 🛑"
     }
 
     return (
@@ -65,10 +65,9 @@ class NewDeck extends Component {
             style={styles.textInput}
             inlineImageLeft="search_icon"
             value={title}
-            placeholder="Deck title.. "
+            placeholder= {errorMessage ? errorAlert : "Deck title.. "}
             onChangeText={value => this.onChangeHandler(value)}
           />
-           {errorAlert}
         </View>
        
         <TouchableOpacity
