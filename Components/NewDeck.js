@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import { pink, white, lightPink } from "../helpers/colors";
+import { pink, white, lightPink, gray } from "../helpers/colors";
 
 class NewDeck extends Component {
   state = {
@@ -61,13 +61,14 @@ class NewDeck extends Component {
           <Text style={styles.headerText}>
             Add a new deck to your Flashcard 🎴 App!
           </Text>
+          <Text style={{ color: gray }}>Start with the title</Text>
         </View>
         <View style={styles.formContainer}>
           <TextInput
             style={styles.textInput}
             inlineImageLeft="search_icon"
             value={title}
-            placeholder={errorMessage ? errorAlert : "Deck title.. "}
+            placeholder={errorMessage ? errorAlert : "Deck title here... "}
             onChangeText={value => this.onChangeHandler(value)}
           />
         </View>
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     },
     width: "100%"
   },
-  headerText: { fontSize: 25, textAlign: "center" },
+  headerText: { fontSize: 25, textAlign: "center", marginBottom: 15 },
   formContainer: {
     justifyContent: "center",
     alignItems: "center",
