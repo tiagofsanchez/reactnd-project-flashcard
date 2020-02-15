@@ -56,10 +56,11 @@ class NewDeck extends Component {
       errorAlert = "Deck title here...👈  missing this 🤓!";
     }
 
+    //NOTE: need to fix the Keyboard as it is not working
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
-          style={{ flex: 1 }}
+          style={{ flex: 1, margin: 20 }}
           behavior={Platform.OS === "ios" ? "height" : null}
         >
           <View style={styles.container}>
@@ -102,8 +103,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "flex-end",
-    margin: 20
+    justifyContent: "flex-end"
   },
   headerContainer: {
     flex: 1,
