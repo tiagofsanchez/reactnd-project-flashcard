@@ -74,7 +74,6 @@ class NewDeck extends Component {
             <View style={styles.formContainer}>
               <TextInput
                 style={styles.textInput}
-                inlineImageLeft="search_icon"
                 value={title}
                 placeholder={errorMessage ? errorAlert : "Deck title here... "}
                 onChangeText={value => this.onChangeHandler(value)}

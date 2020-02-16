@@ -42,7 +42,8 @@ class Deck extends Component {
             <Button title="close" onPress={() => this.modalHandler()} />
           </Modal>
           <Text style={{ textAlign: "center", marginTop: 40 }}>
-            Description of the deck, but I still need to implement it
+            NOTE: Description of the deck, but I still need to implement it on
+            the "DB" and on the store
           </Text>
           <View style={styles.btnGroupContainer}>
             <TouchableOpacity
