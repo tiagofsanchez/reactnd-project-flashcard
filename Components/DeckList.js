@@ -7,7 +7,7 @@ import {
   Platform
 } from "react-native";
 
-import { gray } from "../helpers/colors";
+import { gray, pink } from "../helpers/colors";
 import DeckCard from "./DeckCard";
 
 const DeckList = ({ navigation }) => {
@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
-    fontWeight: "900"
+    fontWeight: "900",
+    textAlign: "center",
+    color: pink,
+    marginBottom: 15
   }
 });
