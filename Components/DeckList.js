@@ -14,7 +14,7 @@ const DeckList = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={{ alignItems: "center" }}>
-        <Text style={styles.title}>Welcome to your Flashcard 🎴 App!</Text>
+        <Text style={styles.title}>Welcome to your Flashcard 🎴 App!!</Text>
         <Text style={{ color: gray }}>Check your decks below</Text>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate("Deck")}>

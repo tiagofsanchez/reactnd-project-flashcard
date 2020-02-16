@@ -19,10 +19,7 @@ class AddCard extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={Platform.OS === "ios" ? "height" : null}
-      >
+      <View style={styles.container}>
         <View style={styles.formContainer}>
           <Text style={{ color: pink, fontSize: 20 }}>Add Card</Text>
           <Text style={{ color: pink, fontSize: 20 }}>Add Card</Text>
@@ -43,7 +40,7 @@ class AddCard extends Component {
             <Text style={{ color: white, fontSize: 20 }}>Submit</Text>
           </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
+      </View>
     );
   }
 }
@@ -72,8 +69,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 7,
     height: 45,
-    marginRight: 40,
-    marginLeft: 40,
     width: "100%",
     alignItems: "center",
     justifyContent: "center"
