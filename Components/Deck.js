@@ -23,12 +23,14 @@ class Deck extends Component {
   }
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, route } = this.props;
     const { modalVisible } = this.state;
+    const { title } = route.params;
+
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.container}>
-          <DeckCard />
+          <DeckCard title={title} />
           <Modal
             animationType="slide"
             transparent={false}

@@ -27,7 +27,10 @@ class DeckList extends Component {
         </View>
         {deckTitles.map(title => {
           return (
-            <TouchableOpacity onPress={() => navigation.navigate("Deck")}>
+            <TouchableOpacity
+              key={title}
+              onPress={() => navigation.navigate("Deck", { title: title })}
+            >
               <DeckCard title={title} />
             </TouchableOpacity>
           );
@@ -50,7 +53,7 @@ export default connect(mapStateToProps)(DeckList);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     margin: 20
   },
   title: {
