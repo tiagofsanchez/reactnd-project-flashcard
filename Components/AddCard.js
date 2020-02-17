@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: pink,
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: "900",
     alignSelf: "flex-start",
     justifyContent: "flex-start",
