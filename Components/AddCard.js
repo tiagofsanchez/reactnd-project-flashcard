@@ -59,6 +59,10 @@ class AddCard extends Component {
     }
   };
 
+  closeHandler = () => {
+    this.props.closeCard();
+  };
+
   render() {
     const { question, answer, errorMessage } = this.state;
     console.log(this.state);
@@ -116,6 +120,18 @@ class AddCard extends Component {
               }
             >
               <Text style={{ color: white, fontSize: 20 }}>Submit</Text>
+            </TouchableOpacity>
+            <View style={{ margin: 5 }} />
+            <TouchableOpacity
+              onPress={() => this.closeHandler()}
+              style={[
+                Platform.OS === "ios"
+                  ? styles.iosSubmitBtn
+                  : styles.androidSubmitBtn,
+                { backgroundColor: gray }
+              ]}
+            >
+              <Text style={{ color: white, fontSize: 20 }}>Close Card</Text>
             </TouchableOpacity>
           </View>
         </View>
