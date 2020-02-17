@@ -12,7 +12,11 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import { pink, white, lightPink, gray } from "../utils/colors";
+import { connect } from "react-redux";
+import { saveDeck } from "../utils/api";
+import { addNewDeck } from "../actions";
+
+import { pink, white, gray } from "../utils/colors";
 
 class NewDeck extends Component {
   state = {
@@ -27,11 +31,14 @@ class NewDeck extends Component {
   };
 
   submitHandler = () => {
-    const { navigation } = this.props;
+    const { navigation, dispatch } = this.props;
     const { title } = this.state;
-    //update store
+
+    //update store -> I don't need to update store here, do I?
+    dispatch(addNewDeck(title));
 
     //update "DB"
+    saveDeck(title);
 
     //update state
     this.setState({
@@ -50,6 +57,8 @@ class NewDeck extends Component {
   };
 
   render() {
+    console.log(this.props);
+
     const { title, errorMessage } = this.state;
     let errorAlert = null;
     if (errorMessage === true) {
@@ -96,7 +105,7 @@ class NewDeck extends Component {
   }
 }
 
-export default NewDeck;
+export default connect()(NewDeck);
 
 const styles = StyleSheet.create({
   container: {

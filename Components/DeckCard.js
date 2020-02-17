@@ -3,9 +3,10 @@ import { View, Text, StyleSheet } from "react-native";
 import { pink, gray } from "../utils/colors";
 
 const DeckCard = props => {
+  const { title } = props;
   return (
     <View style={styles.deckCard}>
-      <Text style={styles.title}>Deck name</Text>
+      <Text style={styles.title}>{title}</Text>
       <Text style={styles.number}>50</Text>
       <Text>Cards</Text>
     </View>

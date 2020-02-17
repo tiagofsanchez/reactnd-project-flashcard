@@ -1,40 +1,51 @@
-import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Platform
-} from "react-native";
+import React, { Component } from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+
 import { connect } from "react-redux";
+import { getDecks, deleteAll } from "../utils/api";
+import { receiveDecks } from "../actions";
 
 import { gray, pink } from "../utils/colors";
 import DeckCard from "./DeckCard";
 
-const DeckList = props => {
-  const { navigation } = props;
-  console.log(props);
+//get the decks and put them in the store
+class DeckList extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    getDecks().then(decks => dispatch(receiveDecks(decks)));
+  }
 
-  return (
-    <View style={styles.container}>
-      <View style={{ alignItems: "center" }}>
-        <Text style={styles.title}>Welcome to your Flashcard 🎴 App!!</Text>
-        <Text style={{ color: gray }}>Check your decks below</Text>
+  render() {
+    const { navigation, deckTitles } = this.props;
+    console.log(this.props);
+
+    return (
+      <View style={styles.container}>
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.title}>Welcome to your Flashcard 🎴 App!!</Text>
+          <Text style={{ color: gray }}>Check your decks below</Text>
+        </View>
+        {deckTitles.map(title => {
+          return (
+            <TouchableOpacity onPress={() => navigation.navigate("Deck")}>
+              <DeckCard title={title} />
+            </TouchableOpacity>
+          );
+        })}
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate("Deck")}>
-        <DeckCard />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Deck")}>
-        <DeckCard />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Deck")}>
-        <DeckCard />
-      </TouchableOpacity>
-    </View>
-  );
-};
+    );
+  }
+}
 
-export default connect()(DeckList);
+function mapStateToProps(decks) {
+  const deckTitles = Object.keys(decks);
+
+  return {
+    deckTitles
+  };
+}
+
+export default connect(mapStateToProps)(DeckList);
 
 const styles = StyleSheet.create({
   container: {
