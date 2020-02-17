@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import { pink, white, lightPink, gray } from "../helpers/colors";
+import { pink, white, lightPink, gray } from "../utils/colors";
 
 class NewDeck extends Component {
   state = {

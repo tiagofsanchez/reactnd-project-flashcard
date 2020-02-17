@@ -5,12 +5,11 @@ import {
   TouchableOpacity,
   Modal,
   Button,
-  StyleSheet,
-  Platform
+  StyleSheet
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import { pink, white, gray } from "../helpers/colors";
+import { pink, white, gray } from "../utils/colors";
 import AddCard from "./AddCard";
 import DeckCard from "./DeckCard";
 
@@ -26,8 +25,6 @@ class Deck extends Component {
   render() {
     const { navigation } = this.props;
     const { modalVisible } = this.state;
-    console.log(this.state);
-
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.container}>

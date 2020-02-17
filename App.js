@@ -5,9 +5,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import reducer from "./reducers";
+
 import HomeStack from "./Components/HomeStack";
 import NewDeck from "./Components/NewDeck";
-import { pink, white } from "./helpers/colors";
+import { pink, white } from "./utils/colors";
 
 function AppStatusBar({ backgroundColor, ...props }) {
   return (
@@ -20,46 +24,48 @@ function AppStatusBar({ backgroundColor, ...props }) {
 const Tab = createBottomTabNavigator();
 function App() {
   return (
-    <View style={{ flex: 1 }}>
-      <AppStatusBar backgroundColor={pink} barStyle="light-content" />
-      <NavigationContainer>
-        <Tab.Navigator
-          initialRouteName="Home"
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ color, size }) => {
-              let icon;
-              if (route.name === "Add Deck") {
-                icon = (
-                  <FontAwesome name="plus-square" size={size} color={color} />
-                );
-              } else if (route.name === "Home") {
-                icon = (
-                  <Ionicons name="ios-bookmarks" size={size} color={color} />
-                );
+    <Provider store={createStore(reducer)}>
+      <View style={{ flex: 1 }}>
+        <AppStatusBar backgroundColor={pink} barStyle="light-content" />
+        <NavigationContainer>
+          <Tab.Navigator
+            initialRouteName="Home"
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ color, size }) => {
+                let icon;
+                if (route.name === "Add Deck") {
+                  icon = (
+                    <FontAwesome name="plus-square" size={size} color={color} />
+                  );
+                } else if (route.name === "Home") {
+                  icon = (
+                    <Ionicons name="ios-bookmarks" size={size} color={color} />
+                  );
+                }
+                return icon;
               }
-              return icon;
-            }
-          })}
-          tabBarOptions={{
-            activeTintColor: Platform.OS === "ios" ? pink : white,
-            style: {
-              height: 80,
-              backgroundColor: Platform.OS === "ios" ? white : pink,
-              shadowColor: "rgba(0, 0, 0, 0.24)",
-              shadowOffset: {
-                width: 0,
-                height: 3
-              },
-              shadowRadius: 6,
-              shadowOpacity: 1
-            }
-          }}
-        >
-          <Tab.Screen name="Home" component={HomeStack} />
-          <Tab.Screen name="Add Deck" component={NewDeck} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </View>
+            })}
+            tabBarOptions={{
+              activeTintColor: Platform.OS === "ios" ? pink : white,
+              style: {
+                height: 80,
+                backgroundColor: Platform.OS === "ios" ? white : pink,
+                shadowColor: "rgba(0, 0, 0, 0.24)",
+                shadowOffset: {
+                  width: 0,
+                  height: 3
+                },
+                shadowRadius: 6,
+                shadowOpacity: 1
+              }
+            }}
+          >
+            <Tab.Screen name="Home" component={HomeStack} />
+            <Tab.Screen name="Add Deck" component={NewDeck} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </View>
+    </Provider>
   );
 }
 

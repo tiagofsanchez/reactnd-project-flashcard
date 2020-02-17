@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { pink, gray } from "../helpers/colors";
+import { pink, gray } from "../utils/colors";
 
 const DeckCard = props => {
   return (

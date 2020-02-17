@@ -10,7 +10,7 @@ import {
   Keyboard
 } from "react-native";
 
-import { pink, white, gray } from "../helpers/colors";
+import { pink, white, gray } from "../utils/colors";
 
 //Given that TextInput doesn't support name property
 //I need to create a component that does that for us
@@ -65,7 +65,6 @@ class AddCard extends Component {
 
   render() {
     const { question, answer, errorMessage } = this.state;
-    console.log(this.state);
 
     let showMessage = null;
     if (errorMessage === true) {

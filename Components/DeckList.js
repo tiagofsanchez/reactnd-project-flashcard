@@ -6,11 +6,15 @@ import {
   StyleSheet,
   Platform
 } from "react-native";
+import { connect } from "react-redux";
 
-import { gray, pink } from "../helpers/colors";
+import { gray, pink } from "../utils/colors";
 import DeckCard from "./DeckCard";
 
-const DeckList = ({ navigation }) => {
+const DeckList = props => {
+  const { navigation } = props;
+  console.log(props);
+
   return (
     <View style={styles.container}>
       <View style={{ alignItems: "center" }}>
@@ -30,7 +34,7 @@ const DeckList = ({ navigation }) => {
   );
 };
 
-export default DeckList;
+export default connect()(DeckList);
 
 const styles = StyleSheet.create({
   container: {
