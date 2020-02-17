@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  StyleSheet
+} from "react-native";
 
 import { connect } from "react-redux";
 import { getDecks, deleteAll } from "../utils/api";
@@ -21,20 +27,22 @@ class DeckList extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={{ alignItems: "center" }}>
-          <Text style={styles.title}>Welcome to your Flashcard 🎴 App!!</Text>
-          <Text style={{ color: gray }}>Check your decks below</Text>
-        </View>
-        {deckTitles.map(title => {
-          return (
-            <TouchableOpacity
-              key={title}
-              onPress={() => navigation.navigate("Deck", { title: title })}
-            >
-              <DeckCard title={title} />
-            </TouchableOpacity>
-          );
-        })}
+        <ScrollView>
+          <View style={{ alignItems: "center" }}>
+            <Text style={styles.title}>Welcome to your Flashcard 🎴 App!!</Text>
+            <Text style={{ color: gray }}>Check your decks below</Text>
+          </View>
+          {deckTitles.map(title => {
+            return (
+              <TouchableOpacity
+                key={title}
+                onPress={() => navigation.navigate("Deck", { title: title })}
+              >
+                <DeckCard title={title} />
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
       </View>
     );
   }

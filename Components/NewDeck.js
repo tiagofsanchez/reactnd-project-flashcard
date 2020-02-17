@@ -34,20 +34,17 @@ class NewDeck extends Component {
     const { navigation, dispatch } = this.props;
     const { title } = this.state;
 
-    //update store -> I don't need to update store here, do I?
-    dispatch(addNewDeck(title));
-
-    //update "DB"
-    saveDeck(title);
-
-    //update state
-    this.setState({
-      title: ""
-    });
-
-    //back to Home if state is not null
     if (title !== "") {
+      //Go to "Home" if title is not null
       navigation.goBack();
+      //update store -> I don't need to update store here, do I?
+      dispatch(addNewDeck(title));
+      //update "DB"
+      saveDeck(title);
+      //update state
+      this.setState({
+        title: ""
+      });
     } else {
       this.setState(prevState => ({
         ...prevState,
