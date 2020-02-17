@@ -9,26 +9,69 @@ import {
   TouchableWithoutFeedback,
   Keyboard
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 
 import { pink, white, gray } from "../helpers/colors";
+
+//Given that TextInput doesn't support name property
+//I need to create a component that does that for us
+
+const TextInputComponent = ({ value, name, onChangeText, ...props }) => (
+  <TextInput
+    value={value}
+    onChangeText={value => onChangeText(value, name)}
+    {...props}
+  />
+);
 
 class AddCard extends Component {
   state = {
     question: "",
-    answer: ""
+    answer: "",
+    errorMessage: false
+  };
+
+  changeTextHandler = (value, name) => {
+    this.setState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
   submitHandler = () => {
+    const { question, answer, errorMessage } = this.state;
+    const { closeCard } = this.props;
+
     //Verify if something is missing on the state and tell the user
+    if (question === "" || answer === "") {
+      this.setState(prevState => ({
+        ...prevState,
+        errorMessage: !errorMessage
+      }));
+    }
+
     //Update the our "DB"
     //Update the store of the app
     // Clean the state
+
     // Go back / close the modal
+    if ((errorMessage === false) & (question !== " ") & (answer !== "")) {
+      closeCard();
+    }
   };
 
   render() {
-    const { question, answer } = this.state;
+    const { question, answer, errorMessage } = this.state;
+    console.log(this.state);
+
+    let showMessage = null;
+    if (errorMessage === true) {
+      showMessage = (
+        <Text style={{ textAlign: "center", marginBottom: 10, fontSize: 18 }}>
+          ☝️ missing something ☝️
+        </Text>
+      );
+    }
+
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
@@ -39,22 +82,31 @@ class AddCard extends Component {
             You can add more questions on your DECK here
           </Text>
           <View style={styles.formContainer}>
-            <TextInput
+            <TextInputComponent
               style={[styles.textInput, { marginBottom: 70 }]}
               placeholder="Your question here..."
               multiline={true}
               textAlignVertical="top"
               value={question}
+              name={"question"}
+              onChangeText={(value, name) =>
+                this.changeTextHandler(value, name)
+              }
             />
-            <TextInput
+            <TextInputComponent
               style={styles.textInput}
               placeholder="The correct answer here..."
               multiline={true}
               textAlignVertical="top"
               value={answer}
+              name={"answer"}
+              onChangeText={(value, name) =>
+                this.changeTextHandler(value, name)
+              }
             />
           </View>
           <View style={styles.btnContainer}>
+            {showMessage}
             <TouchableOpacity
               onPress={() => this.submitHandler()}
               style={

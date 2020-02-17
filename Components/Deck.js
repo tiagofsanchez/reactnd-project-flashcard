@@ -38,7 +38,7 @@ class Deck extends Component {
             visible={modalVisible}
             presentationStyle="fullScreen"
           >
-            <AddCard />
+            <AddCard closeCard={() => this.modalHandler()} />
             <Button title="close" onPress={() => this.modalHandler()} />
           </Modal>
           <Text style={{ textAlign: "center", marginTop: 40 }}>
