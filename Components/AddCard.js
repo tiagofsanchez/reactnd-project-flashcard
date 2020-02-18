@@ -77,6 +77,7 @@ class AddCard extends Component {
 
   render() {
     const { question, answer, errorMessage } = this.state;
+    const { title } = this.props;
 
     let showMessage = null;
     if (errorMessage === true) {
@@ -94,7 +95,7 @@ class AddCard extends Component {
           <Text
             style={{ color: gray, alignSelf: "flex-start", marginBottom: 50 }}
           >
-            You can add more questions on your DECK here
+            {`You can add more questions on your ${title} deck!`}
           </Text>
           <View style={styles.formContainer}>
             <TextInputComponent

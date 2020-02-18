@@ -4,20 +4,25 @@ import { pink, gray } from "../utils/colors";
 import { connect } from "react-redux";
 
 const DeckCard = props => {
-  const { title } = props;
+  const { title, numberOfCards } = props;
 
   return (
     <View style={styles.deckCard}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.number}>50</Text>
-      <Text>Cards</Text>
+      <Text style={styles.number}>{numberOfCards}</Text>
+      <Text>Card(s)</Text>
     </View>
   );
 };
 
-function mapStateToProps(decks) {
+function mapStateToProps(decks, { title }) {
+  let numberOfCards = 0;
+  if (decks[title].questions !== undefined) {
+    numberOfCards = decks[title].questions.length;
+  }
+
   return {
-    decks
+    numberOfCards
   };
 }
 

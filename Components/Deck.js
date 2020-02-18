@@ -1,13 +1,9 @@
 import React, { Component, Fragment } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Modal,
-  Button,
-  StyleSheet
-} from "react-native";
+import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+
+import { connect } from "react-redux";
+import { deleteDeckInStore } from "../actions/index";
 
 import { pink, white, gray } from "../utils/colors";
 import AddCard from "./AddCard";
@@ -20,6 +16,18 @@ class Deck extends Component {
 
   modalHandler() {
     this.setState({ modalVisible: !this.state.modalVisible });
+  }
+
+  deleteDeckHandler() {
+    const { dispatch, navigation, route } = this.props;
+    const { title } = route.params;
+    console.log(title);
+
+    //delete in DB
+    //delete in state
+    dispatch(deleteDeckInStore(title));
+    //goBack
+    navigation.goBack();
   }
 
   render() {
@@ -44,6 +52,12 @@ class Deck extends Component {
             NOTE: Description of the deck, but I still need to implement it on
             the "DB" and on the store
           </Text>
+          <TouchableOpacity
+            style={{ marginTop: 20, alignItems: "center" }}
+            onPress={() => this.deleteDeckHandler()}
+          >
+            <Text style={{ color: "red" }}>delete deck</Text>
+          </TouchableOpacity>
           <View style={styles.btnGroupContainer}>
             <TouchableOpacity
               style={styles.row}
@@ -70,7 +84,7 @@ class Deck extends Component {
   }
 }
 
-export default Deck;
+export default connect()(Deck);
 
 const styles = StyleSheet.create({
   container: {
