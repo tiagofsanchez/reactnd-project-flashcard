@@ -12,6 +12,7 @@ import {
 import { connect } from "react-redux";
 
 import { addNewCard } from "../actions";
+import { saveCardToDeck } from "../utils/api";
 import { pink, white, gray } from "../utils/colors";
 
 //Given that TextInput doesn't support name property
@@ -52,13 +53,13 @@ class AddCard extends Component {
     }
 
     if ((errorMessage === false) & (question !== " ") & (answer !== "")) {
-      //Update the our "DB"
-
       //Update the store of the app
       const card = { question, answer };
       console.log(card);
-
       dispatch(addNewCard(title, card));
+
+      //Update the our "DB"
+      saveCardToDeck(title, card);
       // Clean the state
       this.setState(prevState => ({
         ...prevState,

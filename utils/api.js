@@ -1,5 +1,6 @@
 import { AsyncStorage } from "react-native";
 
+//NOTE: Things that I needed to do
 //getDecks will get us the decks[DONE]
 //getDeck will give us all the info of that deck [do we need this?]
 //saveDeck will save a new deck [DONE]
