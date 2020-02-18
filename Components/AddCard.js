@@ -56,6 +56,8 @@ class AddCard extends Component {
 
       //Update the store of the app
       const card = { question, answer };
+      console.log(card);
+
       dispatch(addNewCard(title, card));
       // Clean the state
       this.setState(prevState => ({

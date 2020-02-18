@@ -11,15 +11,17 @@ function flashcards(state = {}, action) {
       return {
         ...state,
         [action.deck]: {
-          title: action.deck
+          title: action.deck,
+          questions: []
         }
       };
     case ADD_CARD:
+      const { title, card } = action;
       return {
         ...state,
-        title: {
-          ...state[action.title],
-          questions: [{ ...state[action.title].questions }, action.addCard]
+        [title]: {
+          ...state[title],
+          questions: state[title].questions.concat(card)
         }
       };
     default:
