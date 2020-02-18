@@ -9,7 +9,6 @@ const DECK_STORAGE_KEY = "Flashcards:decks";
 
 export function getDecks() {
   return AsyncStorage.getItem(DECK_STORAGE_KEY).then(results => {
-    console.log(JSON.parse(results));
     return JSON.parse(results);
   });
 }
@@ -18,14 +17,20 @@ export function saveDeck(title) {
   return AsyncStorage.mergeItem(
     DECK_STORAGE_KEY,
     JSON.stringify({
-      [title]: { [title]: title }
+      [title]: { title: title }
     })
   );
 }
 
-export function saveCardToDeck(title, questions) {
+export function saveCardToDeck(title, newQuestion) {
   return AsyncStorage.getItem(DECK_STORAGE_KEY).then(results => {
     const data = JSON.parse(results);
+    Object.keys(data).map(dTitle => {
+      if (dTitle === title) {
+        data[dTitle].questions.push(newQuestion);
+      }
+    });
+    AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(data));
   });
 }
 

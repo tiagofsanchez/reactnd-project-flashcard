@@ -54,7 +54,8 @@ function mapStateToProps(decks) {
   const deckTitles = Object.keys(decks);
 
   return {
-    deckTitles
+    deckTitles,
+    decks
   };
 }
 

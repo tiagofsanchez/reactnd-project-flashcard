@@ -1,4 +1,4 @@
-import { GET_DECKS, ADD_DECK } from "../actions";
+import { GET_DECKS, ADD_DECK, ADD_CARD } from "../actions";
 
 function flashcards(state = {}, action) {
   switch (action.type) {
@@ -12,6 +12,14 @@ function flashcards(state = {}, action) {
         ...state,
         [action.deck]: {
           title: action.deck
+        }
+      };
+    case ADD_CARD:
+      return {
+        ...state,
+        title: {
+          ...state[action.title],
+          questions: [{ ...state[action.title].questions }, action.addCard]
         }
       };
     default:

@@ -54,8 +54,6 @@ class NewDeck extends Component {
   };
 
   render() {
-    console.log(this.props);
-
     const { title, errorMessage } = this.state;
     let errorAlert = null;
     if (errorMessage === true) {

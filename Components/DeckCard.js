@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 
 const DeckCard = props => {
   const { title } = props;
-  console.log(props);
 
   return (
     <View style={styles.deckCard}>

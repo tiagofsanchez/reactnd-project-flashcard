@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 
+import { addNewCard } from "../actions";
 import { pink, white, gray } from "../utils/colors";
 
 //Given that TextInput doesn't support name property
@@ -40,7 +41,7 @@ class AddCard extends Component {
 
   submitHandler = () => {
     const { question, answer, errorMessage } = this.state;
-    const { closeCard, dispatch } = this.props;
+    const { closeCard, dispatch, title } = this.props;
 
     //Verify if something is missing on the state and tell the user
     if (question === "" || answer === "") {
@@ -54,8 +55,14 @@ class AddCard extends Component {
       //Update the our "DB"
 
       //Update the store of the app
+      const card = { question, answer };
+      dispatch(addNewCard(title, card));
       // Clean the state
-
+      this.setState(prevState => ({
+        ...prevState,
+        question: "",
+        answer: ""
+      }));
       // Go back / close the modal
       closeCard();
     }
@@ -132,7 +139,7 @@ class AddCard extends Component {
                 { backgroundColor: gray }
               ]}
             >
-              <Text style={{ color: white, fontSize: 20 }}>Close Card</Text>
+              <Text style={{ color: white, fontSize: 20 }}>Close</Text>
             </TouchableOpacity>
           </View>
         </View>
