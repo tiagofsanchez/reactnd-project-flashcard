@@ -25,6 +25,7 @@ class Deck extends Component {
   render() {
     const { navigation, route } = this.props;
     const { modalVisible } = this.state;
+
     const { title } = route.params;
 
     return (

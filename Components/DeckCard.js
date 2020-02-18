@@ -1,9 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { pink, gray } from "../utils/colors";
+import { connect } from "react-redux";
 
 const DeckCard = props => {
   const { title } = props;
+  console.log(props);
+
   return (
     <View style={styles.deckCard}>
       <Text style={styles.title}>{title}</Text>
@@ -13,7 +16,13 @@ const DeckCard = props => {
   );
 };
 
-export default DeckCard;
+function mapStateToProps(decks) {
+  return {
+    decks
+  };
+}
+
+export default connect(mapStateToProps)(DeckCard);
 
 const styles = StyleSheet.create({
   deckCard: {

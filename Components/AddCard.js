@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard
 } from "react-native";
+import { connect } from "react-redux";
 
 import { pink, white, gray } from "../utils/colors";
 
@@ -39,7 +40,7 @@ class AddCard extends Component {
 
   submitHandler = () => {
     const { question, answer, errorMessage } = this.state;
-    const { closeCard } = this.props;
+    const { closeCard, dispatch } = this.props;
 
     //Verify if something is missing on the state and tell the user
     if (question === "" || answer === "") {
@@ -49,12 +50,13 @@ class AddCard extends Component {
       }));
     }
 
-    //Update the our "DB"
-    //Update the store of the app
-    // Clean the state
-
-    // Go back / close the modal
     if ((errorMessage === false) & (question !== " ") & (answer !== "")) {
+      //Update the our "DB"
+
+      //Update the store of the app
+      // Clean the state
+
+      // Go back / close the modal
       closeCard();
     }
   };
@@ -139,7 +141,7 @@ class AddCard extends Component {
   }
 }
 
-export default AddCard;
+export default connect()(AddCard);
 
 const styles = StyleSheet.create({
   container: {

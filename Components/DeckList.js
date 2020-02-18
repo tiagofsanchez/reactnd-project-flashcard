@@ -4,7 +4,8 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
+  Button
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -42,6 +43,7 @@ class DeckList extends Component {
               </TouchableOpacity>
             );
           })}
+          <Button title="delete all" onPress={() => deleteAll()} />
         </ScrollView>
       </View>
     );

@@ -35,9 +35,7 @@ class NewDeck extends Component {
     const { title } = this.state;
 
     if (title !== "") {
-      //Go to "Home" if title is not null
-      navigation.goBack();
-      //update store -> I don't need to update store here, do I?
+      //update store
       dispatch(addNewDeck(title));
       //update "DB"
       saveDeck(title);
@@ -45,6 +43,8 @@ class NewDeck extends Component {
       this.setState({
         title: ""
       });
+      //Go to "Home" if title is not null
+      navigation.goBack();
     } else {
       this.setState(prevState => ({
         ...prevState,
