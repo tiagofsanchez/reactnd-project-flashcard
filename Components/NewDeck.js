@@ -8,7 +8,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Keyboard,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Alert
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -20,6 +21,7 @@ import { pink, white, gray } from "../utils/colors";
 
 class NewDeck extends Component {
   state = {
+    titleExisting: false,
     errorMessage: false,
     title: ""
   };
@@ -31,30 +33,41 @@ class NewDeck extends Component {
   };
 
   submitHandler = () => {
-    const { navigation, dispatch } = this.props;
+    const { navigation, dispatch, deckTitleArray } = this.props;
     const { title } = this.state;
+    const included = deckTitleArray.includes(title);
 
-    if (title !== "") {
+    if (title === "") {
+      this.setState(prevState => ({
+        ...prevState,
+        errorMessage: !prevState.errorMessage
+      }));
+    }
+
+    if (title !== "" && included === false) {
       //update store
       dispatch(addNewDeck(title));
       //update "DB"
       saveDeck(title);
       //update state
       this.setState({
-        title: ""
+        title: "",
+        errorMessage: false
       });
       //Go to "Home" if title is not null
-      navigation.goBack();
-    } else {
+      navigation.navigate("Home");
+    } else if (included) {
       this.setState(prevState => ({
         ...prevState,
-        errorMessage: !prevState.errorMessage
+        titleExisting: !prevState.titleExisting
       }));
     }
   };
 
   render() {
-    const { title, errorMessage } = this.state;
+    const { title, errorMessage, titleExisting } = this.state;
+    console.log(titleExisting);
+
     let errorAlert = null;
     if (errorMessage === true) {
       errorAlert = "Deck title here...👈  missing this 🤓!";
@@ -83,6 +96,9 @@ class NewDeck extends Component {
                 onChangeText={value => this.onChangeHandler(value)}
               />
             </View>
+            {titleExisting ? (
+              <Text style={{ color: "red" }}>title exist</Text>
+            ) : null}
             <TouchableOpacity
               onPress={() => this.submitHandler()}
               style={
@@ -100,7 +116,14 @@ class NewDeck extends Component {
   }
 }
 
-export default connect()(NewDeck);
+function mapStateToProps(decks) {
+  const deckTitleArray = Object.keys(decks);
+  return {
+    deckTitleArray
+  };
+}
+
+export default connect(mapStateToProps)(NewDeck);
 
 const styles = StyleSheet.create({
   container: {
