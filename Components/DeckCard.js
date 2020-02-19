@@ -16,6 +16,7 @@ const DeckCard = props => {
 };
 
 function mapStateToProps(decks, { title }) {
+  //for when the there is no cards
   let numberOfCards = 0;
   if (decks[title].questions !== undefined) {
     numberOfCards = decks[title].questions.length;

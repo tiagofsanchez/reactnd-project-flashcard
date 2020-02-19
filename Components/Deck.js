@@ -70,7 +70,7 @@ class Deck extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.row}
-              onPress={() => navigation.navigate("Quiz")}
+              onPress={() => navigation.navigate("Quiz", { title: title })}
             >
               <Ionicons name="ios-fitness" size={30} color={gray} />
               <View style={styles.btnContainer}>
