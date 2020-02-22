@@ -88,8 +88,6 @@ class AddCard extends Component {
     const { question, answer, errorMessage } = this.state;
     const { title } = this.props;
 
-    console.log(this.state);
-
     let showMessage = null;
     if (errorMessage === true) {
       showMessage = (
