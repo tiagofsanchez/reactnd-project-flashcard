@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { View, Text, Button, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import DeckList from "./DeckList";

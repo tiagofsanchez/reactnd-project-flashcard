@@ -9,8 +9,9 @@ import {
 import { connect } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 
-import { pink, gray, white } from "../utils/colors";
+import { pink, white } from "../utils/colors";
 import DeckCard from "./DeckCard";
+import QuizResults from "./QuizResults";
 
 class Quiz extends Component {
   state = {
@@ -40,7 +41,8 @@ class Quiz extends Component {
     } else {
       this.setState(prevState => ({
         ...prevState,
-        showQueryResults: true
+        showQueryResults: true,
+        correct: prevState.correct + 1
       }));
     }
   }
@@ -65,7 +67,7 @@ class Quiz extends Component {
   render() {
     const { route, numberOfQuestions, questions, navigation } = this.props;
     const { title } = route.params;
-    const { index, showAnswer, showQueryResults } = this.state;
+    const { index, showAnswer, showQueryResults, correct } = this.state;
 
     console.log(this.props);
 
@@ -104,7 +106,10 @@ class Quiz extends Component {
           </Text>
           {showQueryResults ? (
             <View style={styles.questionFormat}>
-              <Text>RESULTS COMPONENT</Text>
+              <QuizResults
+                correct={correct}
+                numberOfQuestions={numberOfQuestions}
+              />
             </View>
           ) : showAnswer ? (
             <View style={styles.questionFormat}>
