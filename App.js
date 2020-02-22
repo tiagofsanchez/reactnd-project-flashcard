@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
+import { composeWithDevTools } from "redux-devtools-extension";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
@@ -24,7 +25,7 @@ function AppStatusBar({ backgroundColor, ...props }) {
 const Tab = createBottomTabNavigator();
 function App() {
   return (
-    <Provider store={createStore(reducer)}>
+    <Provider store={createStore(reducer, composeWithDevTools())}>
       <View style={{ flex: 1 }}>
         <AppStatusBar backgroundColor={pink} barStyle="light-content" />
         <NavigationContainer>

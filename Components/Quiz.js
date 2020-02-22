@@ -120,25 +120,39 @@ class Quiz extends Component {
               <Text>{questions[index].question}</Text>
             </View>
           )}
-
-          <TouchableOpacity onPress={() => this.showResponseHandler()}>
-            <Text style={styles.checkFormat}>Check response</Text>
-          </TouchableOpacity>
+          {!showQueryResults ? (
+            <TouchableOpacity onPress={() => this.showResponseHandler()}>
+              <Text style={styles.checkFormat}>Check response</Text>
+            </TouchableOpacity>
+          ) : null}
         </View>
-        <View style={styles.btnGroupContainer}>
+        {!showQueryResults ? (
+          <View style={styles.btnGroupContainer}>
+            <TouchableOpacity
+              style={styles.btnContainer}
+              onPress={() => this.correctHandler()}
+            >
+              <Ionicons name="ios-checkmark-circle" color={"green"} size={25} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btnContainer}
+              onPress={() => this.wrongHandler()}
+            >
+              <Ionicons name="ios-close-circle" color={"red"} size={25} />
+            </TouchableOpacity>
+          </View>
+        ) : (
           <TouchableOpacity
-            style={styles.btnContainer}
-            onPress={() => this.correctHandler()}
+            onPress={() => navigation.goBack()}
+            style={{
+              justifyContent: "flex-end",
+              flex: 1,
+              alignItems: "center"
+            }}
           >
-            <Ionicons name="ios-checkmark-circle" color={"green"} size={25} />
+            <Text style={styles.goBack}>Go back</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.btnContainer}
-            onPress={() => this.wrongHandler()}
-          >
-            <Ionicons name="ios-close-circle" color={"red"} size={25} />
-          </TouchableOpacity>
-        </View>
+        )}
       </View>
     );
   }

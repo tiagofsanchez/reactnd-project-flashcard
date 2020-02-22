@@ -9,6 +9,7 @@
 - Modal is not working well for addCard
 - Redux dev tools
 - NewDeck component is telling check state after trying to submit a deck with an existing name
+- redux-devtools-extension to work with react native
 
 ## Trying got design a TouchableOpacity that works:
 
