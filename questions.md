@@ -34,3 +34,25 @@ const TouchableOpacityComponent = ({ name, onPress, ...props }) => (
     console.log(name);
   }
 ```
+
+## To do's
+
+- README file
+- If there is not deck, show something nice
+
+QUIZ changes:
+
+- QUIZ with no header as I hate it [DONE]
+- Text on the QUIZ [DONE]
+- at the end of the QUIZ start a new QUIZ if you want [DONE]
+
+NEWDECK:
+
+- Submit button should be "CREATE NEW DECK"
+- Route the user to the NEW DECK VIEW
+
+NOTIFICATIONS:
+
+- Logic for notification has been implemented. Notifications are generated at a specific time if the user hasn't completed at least one quiz for that day.
+
+- delete deck is not working properly

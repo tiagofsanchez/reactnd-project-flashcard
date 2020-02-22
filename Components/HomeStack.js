@@ -4,7 +4,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import DeckList from "./DeckList";
 import Deck from "./Deck";
 import Quiz from "./Quiz";
-import AddCard from "./AddCard";
 
 const Stack = createStackNavigator();
 
@@ -22,8 +21,11 @@ function HomeStack(props) {
           component={Deck}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Quiz" component={Quiz} />
-        <Stack.Screen name="AddCard" component={AddCard} />
+        <Stack.Screen
+          name="Quiz"
+          component={Quiz}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </Fragment>
   );

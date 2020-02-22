@@ -1,15 +1,9 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Platform,
-  TouchableOpacity
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 
-import { pink, white } from "../utils/colors";
+import { pink, white, gray } from "../utils/colors";
 import DeckCard from "./DeckCard";
 import QuizResults from "./QuizResults";
 
@@ -20,6 +14,15 @@ class Quiz extends Component {
     showAnswer: false,
     showQueryResults: false
   };
+
+  restartHandler() {
+    this.setState({
+      index: 0,
+      correct: 0,
+      showAnswer: false,
+      showQueryResults: false
+    });
+  }
 
   showResponseHandler() {
     this.setState(prevState => ({
@@ -68,31 +71,92 @@ class Quiz extends Component {
     const { route, numberOfQuestions, questions, navigation } = this.props;
     const { title } = route.params;
     const { index, showAnswer, showQueryResults, correct } = this.state;
-
     console.log(this.props);
+
+    //answer and question
+    let answer = null;
+    let question = null;
+    if (questions.length >= 1) {
+      answer = (
+        <View style={styles.questionFormat}>
+          <Text style={styles.qAndAText}>{questions[index].answer}</Text>
+        </View>
+      );
+      question = (
+        <View style={styles.questionFormat}>
+          <Text style={styles.qAndAText}>{questions[index].question}</Text>
+        </View>
+      );
+    }
+
+    //check answer button
+    const checkAnswer = (
+      <TouchableOpacity onPress={() => this.showResponseHandler()}>
+        <Text style={styles.checkFormat}>Check answer</Text>
+      </TouchableOpacity>
+    );
+
+    const correctIncorrectBtn = (
+      <View style={styles.btnGroupContainer}>
+        <TouchableOpacity
+          style={styles.btnContainer}
+          onPress={() => this.correctHandler()}
+        >
+          <Ionicons name="ios-checkmark-circle" color={"green"} size={25} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.btnContainer}
+          onPress={() => this.wrongHandler()}
+        >
+          <Ionicons name="ios-close-circle" color={"red"} size={25} />
+        </TouchableOpacity>
+      </View>
+    );
+
+    //my back button
+    const backBtn = (
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.goBackBtn}
+      >
+        <Text style={styles.goBack}>Go back</Text>
+      </TouchableOpacity>
+    );
+
+    const finishQuizBtn = (
+      <View>
+        <TouchableOpacity
+          style={{ alignSelf: "center", marginBottom: 18 }}
+          onPress={() => this.restartHandler()}
+        >
+          <Text style={styles.goBack}>Restart quiz</Text>
+        </TouchableOpacity>
+        {backBtn}
+      </View>
+    );
+
+    //results depending on the user performance
+    const results = (
+      <View style={styles.questionFormat}>
+        <QuizResults correct={correct} numberOfQuestions={numberOfQuestions} />
+      </View>
+    );
 
     //if the you don't have any questions in your card
     if (numberOfQuestions === 0) {
       return (
         <View style={styles.container}>
           <DeckCard title={title} />
-          <View
-            style={[styles.questionContainer, { justifyContent: "center" }]}
-          >
-            <Text style={{ fontSize: 30, textAlign: "center", padding: 20 }}>
-              NO CARDS! Go and add some
-            </Text>
+          <View style={{ flex: 1, justifyContent: "space-between" }}>
+            <View
+              style={[styles.questionContainer, { justifyContent: "center" }]}
+            >
+              <Text style={{ fontSize: 30, textAlign: "center", padding: 20 }}>
+                NO CARDS! Go and add some
+              </Text>
+            </View>
+            {backBtn}
           </View>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{
-              justifyContent: "flex-end",
-              flex: 1,
-              alignItems: "center"
-            }}
-          >
-            <Text style={styles.goBack}>Go back</Text>
-          </TouchableOpacity>
         </View>
       );
     }
@@ -100,59 +164,16 @@ class Quiz extends Component {
     return (
       <View style={styles.container}>
         <DeckCard title={title} />
-        <View style={styles.questionContainer}>
-          <Text style={styles.questionNumber}>
-            {index + 1}/{numberOfQuestions}
-          </Text>
-          {showQueryResults ? (
-            <View style={styles.questionFormat}>
-              <QuizResults
-                correct={correct}
-                numberOfQuestions={numberOfQuestions}
-              />
-            </View>
-          ) : showAnswer ? (
-            <View style={styles.questionFormat}>
-              <Text>{questions[index].answer}</Text>
-            </View>
-          ) : (
-            <View style={styles.questionFormat}>
-              <Text>{questions[index].question}</Text>
-            </View>
-          )}
-          {!showQueryResults ? (
-            <TouchableOpacity onPress={() => this.showResponseHandler()}>
-              <Text style={styles.checkFormat}>Check response</Text>
-            </TouchableOpacity>
-          ) : null}
-        </View>
-        {!showQueryResults ? (
-          <View style={styles.btnGroupContainer}>
-            <TouchableOpacity
-              style={styles.btnContainer}
-              onPress={() => this.correctHandler()}
-            >
-              <Ionicons name="ios-checkmark-circle" color={"green"} size={25} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.btnContainer}
-              onPress={() => this.wrongHandler()}
-            >
-              <Ionicons name="ios-close-circle" color={"red"} size={25} />
-            </TouchableOpacity>
+        <View style={{ flex: 1, justifyContent: "space-between" }}>
+          <View style={styles.questionContainer}>
+            <Text style={styles.questionNumber}>
+              {index + 1}/{numberOfQuestions}
+            </Text>
+            {showQueryResults ? results : showAnswer ? answer : question}
+            {!showQueryResults ? checkAnswer : null}
           </View>
-        ) : (
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{
-              justifyContent: "flex-end",
-              flex: 1,
-              alignItems: "center"
-            }}
-          >
-            <Text style={styles.goBack}>Go back</Text>
-          </TouchableOpacity>
-        )}
+          {!showQueryResults ? correctIncorrectBtn : finishQuizBtn}
+        </View>
       </View>
     );
   }
@@ -184,6 +205,10 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     marginTop: 20,
     alignItems: "center"
+  },
+  qAndAText: {
+    fontSize: 20,
+    fontWeight: "900"
   },
   questionNumber: {
     alignSelf: "flex-end",
@@ -221,6 +246,10 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     alignItems: "center",
     justifyContent: "center"
+  },
+  goBackBtn: {
+    alignSelf: "center",
+    justifyContent: "flex-end"
   },
   goBack: {
     color: pink,
