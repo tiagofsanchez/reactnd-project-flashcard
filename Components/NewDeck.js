@@ -96,9 +96,11 @@ class NewDeck extends Component {
                 onChangeText={value => this.onChangeHandler(value)}
               />
             </View>
-            {titleExisting ? (
-              <Text style={{ color: "red" }}>title exist</Text>
-            ) : null}
+            <View style={{ height: 25 }}>
+              {titleExisting ? (
+                <Text style={{ color: "red" }}>title already exist</Text>
+              ) : null}
+            </View>
             <TouchableOpacity
               onPress={() => this.submitHandler()}
               style={

@@ -24,7 +24,6 @@ class DeckList extends Component {
 
   render() {
     const { navigation, deckTitles } = this.props;
-    console.log(this.props);
 
     return (
       <View style={styles.container}>

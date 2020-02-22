@@ -34,17 +34,26 @@ class AddCard extends Component {
   };
 
   changeTextHandler = (value, name) => {
+    const { question, answer } = this.state;
+
     this.setState(prevState => ({
       ...prevState,
       [name]: value
     }));
+
+    if ((question !== "") & (answer !== "")) {
+      this.setState(prevState => ({
+        ...prevState,
+        errorMessage: false
+      }));
+    }
   };
 
   submitHandler = () => {
     const { question, answer, errorMessage } = this.state;
     const { closeCard, dispatch, title } = this.props;
 
-    //Verify if something is missing on the state and tell the user
+    //Verify if something is missing on the and tell the user
     if (question === "" || answer === "") {
       this.setState(prevState => ({
         ...prevState,
@@ -78,6 +87,8 @@ class AddCard extends Component {
   render() {
     const { question, answer, errorMessage } = this.state;
     const { title } = this.props;
+
+    console.log(this.state);
 
     let showMessage = null;
     if (errorMessage === true) {
