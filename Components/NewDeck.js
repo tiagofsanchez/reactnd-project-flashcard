@@ -54,8 +54,8 @@ class NewDeck extends Component {
         title: "",
         errorMessage: false
       });
-      //Go to "Home" if title is not null
-      navigation.navigate("Home");
+      //Go to "DECK" if title is not null
+      navigation.navigate("Deck", { title: title });
     } else if (included) {
       this.setState(prevState => ({
         ...prevState,
@@ -109,7 +109,9 @@ class NewDeck extends Component {
                   : styles.androidSubmitBtn
               }
             >
-              <Text style={{ color: white, fontSize: 20 }}>Submit</Text>
+              <Text style={{ color: white, fontSize: 20 }}>
+                Create a new deck
+              </Text>
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>

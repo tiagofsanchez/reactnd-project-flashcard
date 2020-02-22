@@ -42,7 +42,7 @@ class DeckList extends Component {
               </TouchableOpacity>
             );
           })}
-          <Button title="deletei all" onPress={() => deleteAll()} />
+          <Button title="delete all" onPress={() => deleteAll()} />
         </ScrollView>
       </View>
     );

@@ -9,6 +9,18 @@
 - Modal is not working well for addCard
 - Redux dev tools
 - NewDeck component is telling check state after trying to submit a deck with an existing name
+  I thought this would be solving that... but it didn't
+
+```js
+  componentDidMount() {
+    this.setState({
+      titleExisting: false,
+      errorMessage: false,
+      title: ""
+    });
+  }
+```
+
 - redux-devtools-extension to work with react native
 
 ## Trying got design a TouchableOpacity that works:
@@ -48,11 +60,10 @@ QUIZ changes:
 
 NEWDECK:
 
-- Submit button should be "CREATE NEW DECK"
-- Route the user to the NEW DECK VIEW
+- Submit button should be "CREATE NEW DECK" [DONE]
+- Route the user to the NEW DECK VIEW [DONE]
 
 NOTIFICATIONS:
 
 - Logic for notification has been implemented. Notifications are generated at a specific time if the user hasn't completed at least one quiz for that day.
-
 - delete deck is not working properly
