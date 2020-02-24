@@ -8,8 +8,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Keyboard,
-  TouchableWithoutFeedback,
-  Alert
+  TouchableWithoutFeedback
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -100,18 +99,20 @@ class NewDeck extends Component {
               <Text style={{ color: "red" }}>title already exist</Text>
             ) : null}
           </View>
-          <TouchableOpacity
-            onPress={() => this.submitHandler()}
-            style={
-              Platform.OS === "ios"
-                ? styles.iosSubmitBtn
-                : styles.androidSubmitBtn
-            }
-          >
-            <Text style={{ color: white, fontSize: 20 }}>
-              Create a new deck
-            </Text>
-          </TouchableOpacity>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              onPress={() => this.submitHandler()}
+              style={
+                Platform.OS === "ios"
+                  ? styles.iosSubmitBtn
+                  : styles.androidSubmitBtn
+              }
+            >
+              <Text style={{ color: white, fontSize: 20 }}>
+                Create a new deck
+              </Text>
+            </TouchableOpacity>
+          </View>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     );
@@ -136,14 +137,14 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "white",
     borderRadius: Platform.OS === "ios" ? 8 : 2,
     padding: 40,
     marginLeft: 10,
     marginRight: 10,
-    marginTop: 17,
+    // marginTop: 17,
     shadowRadius: 3,
     shadowOpacity: 0.8,
     shadowColor: "rgba(0,0,0,0.24)",
@@ -167,16 +168,14 @@ const styles = StyleSheet.create({
     width: "100%",
     fontSize: 20
   },
+  btnContainer: { width: `100%`, justifyContent: "flex-end" },
   iosSubmitBtn: {
     backgroundColor: pink,
     padding: 10,
     borderRadius: 7,
     height: 45,
-    marginRight: 40,
-    marginLeft: 40,
     width: "100%",
-    alignItems: "center",
-    justifyContent: "flex-end"
+    alignItems: "center"
   },
   androidSubmitBtn: {
     backgroundColor: pink,
@@ -184,8 +183,6 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 30,
     borderRadius: 2,
-    height: 45,
-    alignSelf: "flex-end",
-    justifyContent: "flex-end"
+    height: 45
   }
 });
