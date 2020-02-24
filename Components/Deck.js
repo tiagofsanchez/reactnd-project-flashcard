@@ -24,10 +24,11 @@ class Deck extends Component {
     console.log(title);
 
     //delete in DB
+
     //delete in state
+    // navigation.goBack();
     dispatch(deleteDeckInStore(title));
     //goBack
-    navigation.goBack();
   }
 
   render() {
