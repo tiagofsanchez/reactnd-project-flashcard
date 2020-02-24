@@ -31,12 +31,6 @@ function flashcards(state = {}, action) {
 
     case DEL_DECK:
       const { deckName } = action;
-      // const newState = Object.keys(state).reduce((object, key) => {
-      //   if (key !== deckName) {
-      //     object[key] = state[key];
-      //   }
-      //   return object;
-      // }, {});
 
       console.log(`QUERO APAGAR: ${deckName}`);
 
