@@ -77,43 +77,41 @@ class NewDeck extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
-          style={{ flex: 1, margin: 20 }}
-          behavior={Platform.OS === "ios" ? "height" : null}
+          style={styles.container}
+          behavior={Platform.OS === "ios" ? "padding" : null}
         >
-          <View style={styles.container}>
-            <View style={styles.headerContainer}>
-              <Ionicons name="ios-clipboard" size={80} color={pink} />
-              <Text style={styles.headerText}>
-                Add a new deck to your Flashcard 🎴 App!
-              </Text>
-              <Text style={{ color: gray }}>Start with the title</Text>
-            </View>
-            <View style={styles.formContainer}>
-              <TextInput
-                style={styles.textInput}
-                value={title}
-                placeholder={errorMessage ? errorAlert : "Deck title here... "}
-                onChangeText={value => this.onChangeHandler(value)}
-              />
-            </View>
-            <View style={{ height: 25 }}>
-              {titleExisting ? (
-                <Text style={{ color: "red" }}>title already exist</Text>
-              ) : null}
-            </View>
-            <TouchableOpacity
-              onPress={() => this.submitHandler()}
-              style={
-                Platform.OS === "ios"
-                  ? styles.iosSubmitBtn
-                  : styles.androidSubmitBtn
-              }
-            >
-              <Text style={{ color: white, fontSize: 20 }}>
-                Create a new deck
-              </Text>
-            </TouchableOpacity>
+          <View style={styles.headerContainer}>
+            <Ionicons name="ios-clipboard" size={80} color={pink} />
+            <Text style={styles.headerText}>
+              Add a new deck to your Flashcard 🎴 App!
+            </Text>
+            <Text style={{ color: gray }}>Start with the title</Text>
           </View>
+          <View style={styles.formContainer}>
+            <TextInput
+              style={styles.textInput}
+              value={title}
+              placeholder={errorMessage ? errorAlert : "Deck title here... "}
+              onChangeText={value => this.onChangeHandler(value)}
+            />
+          </View>
+          <View style={{ height: 25 }}>
+            {titleExisting ? (
+              <Text style={{ color: "red" }}>title already exist</Text>
+            ) : null}
+          </View>
+          <TouchableOpacity
+            onPress={() => this.submitHandler()}
+            style={
+              Platform.OS === "ios"
+                ? styles.iosSubmitBtn
+                : styles.androidSubmitBtn
+            }
+          >
+            <Text style={{ color: white, fontSize: 20 }}>
+              Create a new deck
+            </Text>
+          </TouchableOpacity>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     );
@@ -133,7 +131,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    margin: 20
   },
   headerContainer: {
     flex: 1,
@@ -177,7 +176,7 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     width: "100%",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "flex-end"
   },
   androidSubmitBtn: {
     backgroundColor: pink,
@@ -187,6 +186,6 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     height: 45,
     alignSelf: "flex-end",
-    justifyContent: "center"
+    justifyContent: "flex-end"
   }
 });

@@ -7,7 +7,8 @@ import {
   Platform,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  KeyboardAvoidingView
 } from "react-native";
 import { connect } from "react-redux";
 
@@ -99,7 +100,11 @@ class AddCard extends Component {
 
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior={Platform.OS === "ios" ? "padding" : null}
+          enabled
+        >
           <Text style={styles.headerText}>Add a new card</Text>
           <Text
             style={{ color: gray, alignSelf: "flex-start", marginBottom: 50 }}
@@ -155,7 +160,7 @@ class AddCard extends Component {
               <Text style={{ color: white, fontSize: 20 }}>Close</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     );
   }
@@ -166,6 +171,7 @@ export default connect()(AddCard);
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
+    justifyContent: "flex-end",
     margin: 20,
     marginTop: 50,
     flex: 1
@@ -193,8 +199,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     height: 45,
     width: "100%",
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: "center"
   },
   androidSubmitBtn: {
     backgroundColor: pink,
@@ -203,7 +208,6 @@ const styles = StyleSheet.create({
     paddingRight: 30,
     borderRadius: 2,
     height: 45,
-    alignSelf: "flex-end",
-    justifyContent: "center"
+    alignSelf: "flex-end"
   }
 });
