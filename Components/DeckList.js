@@ -6,64 +6,59 @@ import {
   TouchableOpacity,
   StyleSheet,
   Button,
-  AsyncStorage
+  Platform
 } from "react-native";
 
 import { connect } from "react-redux";
-import { getDecks } from "../utils/api";
-import { receiveDecks } from "../actions";
+import { getDecks, deleteAll } from "../utils/api";
+import { receiveDecks, deleteAllDecksInStore } from "../actions";
 
 import { gray, pink } from "../utils/colors";
 import DeckCard from "./DeckCard";
 
 //get the decks and put them in the store
 class DeckList extends Component {
-  state = {
-    del: false
-  };
-
   componentDidMount() {
     const { dispatch } = this.props;
     getDecks().then(decks => dispatch(receiveDecks(decks)));
   }
 
-  deleteAll() {
+  deleteAllHandler() {
     const { dispatch } = this.props;
-    const { del } = this.state;
-    this.setState(prevSate => ({
-      ...prevSate,
-      del: true
-    }));
-
-    AsyncStorage.clear().then(
-      getDecks().then(decks => dispatch(receiveDecks(decks)))
-    );
+    dispatch(deleteAllDecksInStore());
+    deleteAll();
   }
 
   render() {
     const { navigation, deckTitles } = this.props;
-    console.log(this.state.del);
 
     return (
-      <View style={styles.container}>
-        <ScrollView>
+      <ScrollView>
+        <View style={styles.container}>
           <View style={{ alignItems: "center" }}>
             <Text style={styles.title}>Welcome to your Flashcard 🎴 App!!</Text>
             <Text style={{ color: gray }}>Check your decks below</Text>
+            <TouchableOpacity
+              onPress={() => this.deleteAllHandler()}
+              style={styles.delete}
+            >
+              <Text style={{ color: "red" }}>delete all</Text>
+            </TouchableOpacity>
           </View>
-          {deckTitles.map(title => {
-            return (
-              <TouchableOpacity
-                key={title}
-                onPress={() => navigation.navigate("Deck", { title: title })}
-              >
-                <DeckCard title={title} />
-              </TouchableOpacity>
-            );
-          })}
-          <Button title="delete all" onPress={() => this.deleteAll()} />
-        </ScrollView>
-      </View>
+          <View style={styles.decksListContainer}>
+            {deckTitles.map(title => {
+              return (
+                <TouchableOpacity
+                  key={title}
+                  onPress={() => navigation.navigate("Deck", { title: title })}
+                >
+                  <DeckCard title={title} />
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -82,8 +77,11 @@ export default connect(mapStateToProps)(DeckList);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
     margin: 20
+  },
+  decksListContainer: {
+    flex: 1,
+    justifyContent: "space-between"
   },
   title: {
     fontSize: 30,
@@ -91,5 +89,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: pink,
     marginBottom: 15
+  },
+  delete: {
+    alignItems: "center",
+    marginTop: 10
   }
 });

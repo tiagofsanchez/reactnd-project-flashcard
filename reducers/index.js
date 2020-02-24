@@ -1,4 +1,6 @@
-import { GET_DECKS, ADD_DECK, ADD_CARD, DEL_DECK } from "../actions";
+import { GET_DECKS, ADD_DECK, ADD_CARD, DEL_DECK, DEL_ALL } from "../actions";
+
+const initState = {};
 
 function flashcards(state = {}, action) {
   switch (action.type) {
@@ -24,6 +26,8 @@ function flashcards(state = {}, action) {
           questions: state[title].questions.concat(card)
         }
       };
+    case DEL_ALL:
+      return initState;
     case DEL_DECK:
       const { deckName } = action;
       const newState = delete state[deckName];

@@ -1,7 +1,7 @@
 # A couple of things that I am trying to solve
 
-- Hide the keyboard on a form - `NewDeck` and `AddCard` components;
-- Delete all and delete Deck are not working properly... not sure why... but need to check this
+- Hide the keyboard on a form - `NewDeck` and `AddCard` components; [Almost done - For ADDCARD is done]
+- Delete all and delete Deck are not working properly... not sure why... but need to check this [Almost done - For delete All is done]
 - Quiz Header, need to check on how to make it better and prettier
 - Refactor the way I design the Button with TouchableOpacity so that I can use it all over my app
 - Get a description of the Deck in

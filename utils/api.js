@@ -36,5 +36,5 @@ export function saveCardToDeck(title, newQuestion) {
 }
 
 export function deleteAll() {
-  return AsyncStorage.clear().then(getDecks());
+  return AsyncStorage.clear();
 }

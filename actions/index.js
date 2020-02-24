@@ -2,6 +2,7 @@ export const GET_DECKS = "GET_DECKS";
 export const ADD_DECK = "ADD_DECK";
 export const ADD_CARD = "ADD_CARD";
 export const DEL_DECK = "DEL_DECK";
+export const DEL_ALL = "DEL_ALL";
 
 export function receiveDecks(decks) {
   return {
@@ -29,5 +30,11 @@ export function deleteDeckInStore(deckName) {
   return {
     type: DEL_DECK,
     deckName
+  };
+}
+
+export function deleteAllDecksInStore() {
+  return {
+    type: DEL_ALL
   };
 }
