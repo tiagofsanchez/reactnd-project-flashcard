@@ -1,7 +1,7 @@
 # A couple of things that I am trying to solve
 
 - Hide the keyboard on a form - `NewDeck` and `AddCard` components;
-- Delete all and delete Deck is not working properly... not sure why... but need to check this
+- Delete all and delete Deck are not working properly... not sure why... but need to check this
 - Quiz Header, need to check on how to make it better and prettier
 - Refactor the way I design the Button with TouchableOpacity so that I can use it all over my app
 - Get a description of the Deck in
@@ -65,5 +65,6 @@ NEWDECK:
 
 NOTIFICATIONS:
 
-- Logic for notification has been implemented. Notifications are generated at a specific time if the user hasn't completed at least one quiz for that day.
+- Logic for notification has been implemented. Notifications are generated at a specific time if the user hasn't completed at least one quiz for that day. [DONE]
+
 - delete deck is not working properly

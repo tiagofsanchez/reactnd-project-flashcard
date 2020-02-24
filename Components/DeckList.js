@@ -5,11 +5,12 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Button
+  Button,
+  AsyncStorage
 } from "react-native";
 
 import { connect } from "react-redux";
-import { getDecks, deleteAll } from "../utils/api";
+import { getDecks } from "../utils/api";
 import { receiveDecks } from "../actions";
 
 import { gray, pink } from "../utils/colors";
@@ -17,13 +18,31 @@ import DeckCard from "./DeckCard";
 
 //get the decks and put them in the store
 class DeckList extends Component {
+  state = {
+    del: false
+  };
+
   componentDidMount() {
     const { dispatch } = this.props;
     getDecks().then(decks => dispatch(receiveDecks(decks)));
   }
 
+  deleteAll() {
+    const { dispatch } = this.props;
+    const { del } = this.state;
+    this.setState(prevSate => ({
+      ...prevSate,
+      del: true
+    }));
+
+    AsyncStorage.clear().then(
+      getDecks().then(decks => dispatch(receiveDecks(decks)))
+    );
+  }
+
   render() {
     const { navigation, deckTitles } = this.props;
+    console.log(this.state.del);
 
     return (
       <View style={styles.container}>
@@ -42,7 +61,7 @@ class DeckList extends Component {
               </TouchableOpacity>
             );
           })}
-          <Button title="delete all" onPress={() => deleteAll()} />
+          <Button title="delete all" onPress={() => this.deleteAll()} />
         </ScrollView>
       </View>
     );

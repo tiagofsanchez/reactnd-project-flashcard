@@ -65,7 +65,6 @@ class NewDeck extends Component {
 
   render() {
     const { title, errorMessage, titleExisting } = this.state;
-    console.log(titleExisting);
 
     let errorAlert = null;
     if (errorMessage === true) {

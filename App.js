@@ -9,6 +9,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
+import middleware from "./middleware";
 
 import HomeStack from "./Components/HomeStack";
 import NewDeck from "./Components/NewDeck";
@@ -31,7 +32,7 @@ class App extends Component {
 
   render() {
     return (
-      <Provider store={createStore(reducer, composeWithDevTools())}>
+      <Provider store={createStore(reducer, composeWithDevTools(middleware))}>
         <View style={{ flex: 1 }}>
           <AppStatusBar backgroundColor={pink} barStyle="light-content" />
           <NavigationContainer>
