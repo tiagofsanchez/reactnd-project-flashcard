@@ -1,4 +1,4 @@
-import { GET_DECKS, ADD_DECK, ADD_CARD, DEL_ALL } from "../actions";
+import { GET_DECKS, ADD_DECK, ADD_CARD, DEL_ALL, DEL_DECK } from "../actions";
 
 const initState = {};
 
@@ -29,17 +29,16 @@ function flashcards(state = {}, action) {
     case DEL_ALL:
       return initState;
 
-    // case DEL_DECK:
-    //   const newState = Object.keys(state).reduce((newSt, key) => {
-    //     if (key !== action.deckName) {
-    //       newSt[key] = state[key];
-    //     }
-    //     return newSt;
-    //   }, {});
+    case DEL_DECK:
+      const newState = Object.keys(state).reduce((newSt, key) => {
+        if (key !== action.deckName) {
+          newSt[key] = state[key];
+        }
+        return newSt;
+      }, {});
 
-    //   console.log(newState);
+      return { ...newState };
 
-    //   return { ...newState };
     default:
       return state;
   }

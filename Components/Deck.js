@@ -5,10 +5,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { connect } from "react-redux";
 
 import { deleteDeck } from "../utils/api";
+import { deleteDeckInStore } from "../actions";
 import { pink, white, gray } from "../utils/colors";
 import AddCard from "./AddCard";
 import DeckCard from "./DeckCard";
-import { from } from "rxjs/observable/from";
 
 class Deck extends Component {
   state = {
@@ -20,14 +20,16 @@ class Deck extends Component {
   }
 
   deleteDeckHandler() {
-    const { navigation, route } = this.props;
+    const { navigation, route, dispatch } = this.props;
     const { title } = route.params;
     console.log(title);
 
     //delete in DB
     deleteDeck(title);
+    //Go Back HOME
     navigation.navigate("Home");
-
+    //Delete in store
+    dispatch(deleteDeckInStore(title));
     //goBack
   }
 
@@ -40,7 +42,7 @@ class Deck extends Component {
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.container}>
-          {title ? <DeckCard title={title} /> : null}
+          <DeckCard title={title} />
           <Modal
             animationType="slide"
             transparent={false}
