@@ -1,13 +1,14 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { connect } from "react-redux";
-import { deleteDeckInStore } from "../actions/index";
 
+import { deleteDeck } from "../utils/api";
 import { pink, white, gray } from "../utils/colors";
 import AddCard from "./AddCard";
 import DeckCard from "./DeckCard";
+import { from } from "rxjs/observable/from";
 
 class Deck extends Component {
   state = {
@@ -19,15 +20,14 @@ class Deck extends Component {
   }
 
   deleteDeckHandler() {
-    const { dispatch, navigation, route } = this.props;
+    const { navigation, route } = this.props;
     const { title } = route.params;
     console.log(title);
 
     //delete in DB
+    deleteDeck(title);
+    navigation.navigate("Home");
 
-    //delete in state
-    // navigation.goBack();
-    dispatch(deleteDeckInStore(title));
     //goBack
   }
 
@@ -40,7 +40,7 @@ class Deck extends Component {
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.container}>
-          <DeckCard title={title} />
+          {title ? <DeckCard title={title} /> : null}
           <Modal
             animationType="slide"
             transparent={false}
@@ -116,5 +116,3 @@ const styles = StyleSheet.create({
     fontSize: 20
   }
 });
-
-//Notes: onDismiss for the modal doesn't work, why is that so?
