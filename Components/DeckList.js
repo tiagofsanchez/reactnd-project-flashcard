@@ -5,8 +5,7 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Button,
-  Platform
+  Image
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -45,18 +44,27 @@ class DeckList extends Component {
               <Text style={{ color: "red" }}>delete all</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.decksListContainer}>
-            {deckTitles.map(title => {
-              return (
-                <TouchableOpacity
-                  key={title}
-                  onPress={() => navigation.navigate("Deck", { title: title })}
-                >
-                  <DeckCard title={title} />
-                </TouchableOpacity>
-              );
-            })}
-          </View>
+          {deckTitles ? (
+            <View style={styles.decksListContainer}>
+              {deckTitles.map(title => {
+                return (
+                  <TouchableOpacity
+                    key={title}
+                    onPress={() =>
+                      navigation.navigate("Deck", { title: title })
+                    }
+                  >
+                    <DeckCard title={title} />
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          ) : (
+            <Image
+              style={styles.image}
+              source={require("./Images.noDecks.png")}
+            />
+          )}
         </View>
       </ScrollView>
     );
@@ -67,8 +75,7 @@ function mapStateToProps(decks) {
   const deckTitles = Object.keys(decks);
 
   return {
-    deckTitles,
-    decks
+    deckTitles
   };
 }
 
@@ -83,6 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between"
   },
+  image: { height: 100, flex: 1, justifyContent: "center" },
   title: {
     fontSize: 30,
     fontWeight: "900",
