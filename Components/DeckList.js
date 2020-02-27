@@ -30,41 +30,60 @@ class DeckList extends Component {
 
   render() {
     const { navigation, deckTitles } = this.props;
+    let deckList = "";
+    if (deckTitles.length === 0) {
+      deckList = (
+        <View style={styles.imageContainer}>
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 18,
+              marginBottom: 30,
+              marginTop: 40,
+              color: gray,
+              fontWeight: "800"
+            }}
+          >
+            You don't have any decks yet! Go on add some first!
+          </Text>
+          <Image style={styles.image} source={require("../Images/wrong.png")} />
+        </View>
+      );
+    } else {
+      deckList = (
+        <View style={styles.decksListContainer}>
+          {deckTitles.map(title => {
+            return (
+              <TouchableOpacity
+                key={title}
+                onPress={() => navigation.navigate("Deck", { title: title })}
+              >
+                <DeckCard title={title} />
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      );
+    }
 
     return (
       <ScrollView>
         <View style={styles.container}>
           <View style={{ alignItems: "center" }}>
             <Text style={styles.title}>Welcome to your Flashcard 🎴 App!!</Text>
-            <Text style={{ color: gray }}>Check your decks below</Text>
-            <TouchableOpacity
-              onPress={() => this.deleteAllHandler()}
-              style={styles.delete}
-            >
-              <Text style={{ color: "red" }}>delete all</Text>
-            </TouchableOpacity>
+            {deckTitles.length > 0 ? (
+              <Text style={{ color: gray }}>Check your decks below</Text>
+            ) : null}
+            {deckTitles.length > 0 ? (
+              <TouchableOpacity
+                onPress={() => this.deleteAllHandler()}
+                style={styles.delete}
+              >
+                <Text style={{ color: "red" }}>delete all</Text>
+              </TouchableOpacity>
+            ) : null}
           </View>
-          {deckTitles ? (
-            <View style={styles.decksListContainer}>
-              {deckTitles.map(title => {
-                return (
-                  <TouchableOpacity
-                    key={title}
-                    onPress={() =>
-                      navigation.navigate("Deck", { title: title })
-                    }
-                  >
-                    <DeckCard title={title} />
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
-          ) : (
-            <Image
-              style={styles.image}
-              source={require("./Images.noDecks.png")}
-            />
-          )}
+          {deckList}
         </View>
       </ScrollView>
     );
@@ -90,7 +109,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between"
   },
-  image: { height: 100, flex: 1, justifyContent: "center" },
+  image: { width: 200, height: 200, alignSelf: "center" },
+  imageContainer: { flex: 1, justifyContent: "space-between" },
   title: {
     fontSize: 30,
     fontWeight: "900",

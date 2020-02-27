@@ -2,8 +2,8 @@
 
 - Hide the keyboard on a form - `NewDeck` and `AddCard` components; [Almost done - For ADDCARD is done]
 - Delete all and delete Deck are not working properly... not sure why... but need to check this [Almost done - For delete All is done]
-- Quiz Header, need to check on how to make it better and prettier
-- Refactor the way I design the Button with TouchableOpacity so that I can use it all over my app
+- Quiz Header, need to check on how to make it better and prettier [DONE]
+- Refactor the way I design the Button with TouchableOpacity so that I can use it all over my app [NOT FOR NOW]
 - Get a description of the Deck in
 - Check why alert is not working properly
 - Modal is not working well for addCard
@@ -20,8 +20,6 @@
     });
   }
 ```
-
-- redux-devtools-extension to work with react native
 
 ## Trying got design a TouchableOpacity that works:
 
