@@ -22,7 +22,6 @@ class Deck extends Component {
   deleteDeckHandler() {
     const { navigation, route, dispatch } = this.props;
     const { title } = route.params;
-    console.log(title);
 
     //delete in DB
     deleteDeck(title);
