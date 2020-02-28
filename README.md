@@ -1,6 +1,6 @@
 # Flashcards - A App built with React Native
 
-This is UDACITY React nanodegree capstone project #3.
+This is UDACITY React nanodegree capstone project #3 and was designed for IOS, despite the fact some components could be used on both platforms.
 
 ## Installation
 
@@ -152,3 +152,11 @@ It is very important to have the right data at the right life-cycle of your app 
 I have also implemented a delete all feature and an option to delete the individual decks. If you would like to check the details, please check the `utils/api.js` for "DB" updates and `actions/index.js`, `reducers/index.js` for the store that I have implemented.
 
 Now that I am thinking about it could I have all of this in my `utils/api.js`? I mean, could I, every time that I trigger a "DB" update have change my store? I guess this will be cleaner for the component, but not entirely sure if this are the best practices. Anyone?
+
+## Additional things that I implemented
+
+In this project I implemented a series of things that were not part of the rubric, I will list them below:
+
+- Validation if Deck is already existing or not when the user is adding a new deck;
+- Delete all functionality on the Home page, where the user can view the list of decks available;
+- Functionality to delete individual decks;

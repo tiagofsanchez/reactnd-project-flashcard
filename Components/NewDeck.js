@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { saveDeck } from "../utils/api";
@@ -124,6 +125,10 @@ function mapStateToProps(decks) {
     deckTitleArray
   };
 }
+
+NewDeck.propTypes = {
+  deckTitleArray: PropTypes.array
+};
 
 export default connect(mapStateToProps)(NewDeck);
 

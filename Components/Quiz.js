@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
 
 import { pink, white, gray } from "../utils/colors";
 import DeckCard from "./DeckCard";
@@ -188,6 +189,12 @@ function mapStateToProps(decks, { route }) {
     questions: deck.questions
   };
 }
+
+Quiz.propTypes = {
+  deck: PropTypes.object,
+  numberOfQuestions: PropTypes.number,
+  questions: PropTypes.array
+};
 
 export default connect(mapStateToProps)(Quiz);
 

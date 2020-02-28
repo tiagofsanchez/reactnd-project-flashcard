@@ -30,14 +30,15 @@ function flashcards(state = {}, action) {
       return initState;
 
     case DEL_DECK:
-      const newState = Object.keys(state).reduce((newSt, key) => {
+      return Object.keys(state).reduce((newSt, key) => {
         if (key !== action.deckName) {
-          newSt[key] = state[key];
+          return {
+            ...newSt,
+            [key]: state[key]
+          };
         }
         return newSt;
       }, {});
-
-      return { ...newState };
 
     default:
       return state;

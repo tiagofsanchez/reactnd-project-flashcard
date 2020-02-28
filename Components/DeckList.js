@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Image
 } from "react-native";
+import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { getDecks, deleteAll } from "../utils/api";
@@ -34,16 +35,7 @@ class DeckList extends Component {
     if (deckTitles.length === 0) {
       deckList = (
         <View style={styles.imageContainer}>
-          <Text
-            style={{
-              textAlign: "center",
-              fontSize: 18,
-              marginBottom: 30,
-              marginTop: 40,
-              color: gray,
-              fontWeight: "800"
-            }}
-          >
+          <Text style={styles.message}>
             You don't have any decks yet! Go on add some first!
           </Text>
           <Image style={styles.image} source={require("../Images/wrong.png")} />
@@ -92,11 +84,14 @@ class DeckList extends Component {
 
 function mapStateToProps(decks) {
   const deckTitles = Object.keys(decks);
-
   return {
     deckTitles
   };
 }
+
+DeckList.propTypes = {
+  deckTitles: PropTypes.array
+};
 
 export default connect(mapStateToProps)(DeckList);
 
@@ -111,6 +106,14 @@ const styles = StyleSheet.create({
   },
   image: { width: 200, height: 200, alignSelf: "center" },
   imageContainer: { flex: 1, justifyContent: "space-between" },
+  message: {
+    textAlign: "center",
+    fontSize: 18,
+    marginBottom: 30,
+    marginTop: 40,
+    color: gray,
+    fontWeight: "800"
+  },
   title: {
     fontSize: 30,
     fontWeight: "900",

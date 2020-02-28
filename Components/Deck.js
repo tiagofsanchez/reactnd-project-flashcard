@@ -51,10 +51,6 @@ class Deck extends Component {
           >
             <AddCard title={title} closeCard={() => this.modalHandler()} />
           </Modal>
-          <Text style={{ textAlign: "center", marginTop: 40 }}>
-            NOTE: Description of the deck, but I still need to implement it on
-            the "DB" and on the store
-          </Text>
           <TouchableOpacity
             style={{ marginTop: 20, alignItems: "center" }}
             onPress={() => this.deleteDeckHandler()}

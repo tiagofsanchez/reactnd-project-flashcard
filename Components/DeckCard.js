@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { pink, gray } from "../utils/colors";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 const DeckCard = props => {
   const { title, numberOfCards } = props;
@@ -16,16 +17,15 @@ const DeckCard = props => {
 };
 
 function mapStateToProps(decks, { title }) {
-  //for when the there is no cards
-  let numberOfCards = 0;
-  if (decks[title].questions !== undefined && title !== undefined) {
-    numberOfCards = decks[title].questions.length;
-  }
-
   return {
-    numberOfCards
+    numberOfCards: decks[title] ? decks[title].length : 0
   };
 }
+
+DeckCard.propTypes = {
+  decks: PropTypes.object,
+  title: PropTypes.string
+};
 
 export default connect(mapStateToProps)(DeckCard);
 
